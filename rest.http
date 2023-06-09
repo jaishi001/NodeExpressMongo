@@ -1,0 +1,14 @@
+#TEST REQUESTS
+
+
+
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+    "firstName":"Arjun",
+    "lastName":"Jaishi",
+    "email":"a.jaishi@ggmail.com",
+    "phone":"9765425173",
+    "password":"Arjun123"
+}

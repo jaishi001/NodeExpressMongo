@@ -3,6 +3,7 @@ const { connectMongoDB } = require('./config/db');
 require("colors");
 
 
+const userRoute = require('./routes/UserRoute');
 
 
 require('dotenv').config({});
@@ -18,6 +19,9 @@ connectMongoDB();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+
+app.use(userRoute);
+
 
 
 
