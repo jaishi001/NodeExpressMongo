@@ -21,9 +21,19 @@ GET http://localhost:3000/user
 
 
 ### FIND USER BY QUERY VALUE
-GET http://localhost:3000/users?id=6485ba287aa9ace5003b899f
+GET http://localhost:3000/users?id=6485b9937aa9ace5003b899b
 
 
 ### DELETE USER
 
 DELETE http://localhost:3000/user/6485ba287aa9ace5003b899f
+
+
+### UPDATE USER
+PUT http://localhost:3000/user/6485b9937aa9ace5003b899b
+Content-Type: application/json
+
+{
+    "firstName":"ArjunJ",
+    "lastName":"Raj"
+}
