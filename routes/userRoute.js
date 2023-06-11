@@ -74,9 +74,19 @@ router.get("/users", async function (req, res) {
  */
 
 router.delete("/user/:id", async function (req, res) {
-  const user = await User.deleteOne({ _id: req.params.id });
-  if (user) {
-    return res.json({ msg: "User Deleted !", user });
+  const user = User.findById({ _id: req.params.id });
+
+  const data = await User.deleteOne({ _id: req.params.id });
+  if (data) {
+    if (data.deletedCount == 0) {
+      return res.json({
+        msg: "User Already Deleted !",
+      });
+    }
+    return res.json({
+      msg: "User Deleted !",
+      data: data,
+    });
   }
   return res.json({ msg: "Unable to delete user" });
 });
