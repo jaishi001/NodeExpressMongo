@@ -80,7 +80,7 @@ router.delete("/user/:id", async function (req, res) {
   if (data) {
     if (data.deletedCount == 0) {
       return res.json({
-        msg: "User Already Deleted !",
+        msg: "User Already Deleted !", // can Be used in soft delete
       });
     }
     return res.json({
