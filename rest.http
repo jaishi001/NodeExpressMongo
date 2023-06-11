@@ -22,3 +22,8 @@ GET http://localhost:3000/user
 
 ### FIND USER BY QUERY VALUE
 GET http://localhost:3000/users?id=6485ba227aa9ace5003b899d
+
+
+### DELETE USER
+
+DELETE http://localhost:3000/user/6485ba227aa9ace5003b899d

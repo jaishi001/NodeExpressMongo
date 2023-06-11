@@ -53,7 +53,8 @@ router.get("/user", async function (req, res) {
 /**
  *
  * Find user by query
- * GET: http://localhost:3000/user?id=
+ * GET http://localhost:3000/users?id=6485ba227aa9ace5003b899d
+ *
  *
  */
 
@@ -65,4 +66,19 @@ router.get("/users", async function (req, res) {
   }
   return res.json(user);
 });
+
+/**
+ * Delete User
+ * http://locahost:3000/user/:id
+ *
+ */
+
+router.delete("/user/:id", async function (req, res) {
+  const user = await User.deleteOne({ _id: req.params.id });
+  if (user) {
+    return res.json({ msg: "User Deleted !", user });
+  }
+  return res.json({ msg: "Unable to delete user" });
+});
+
 module.exports = router;
