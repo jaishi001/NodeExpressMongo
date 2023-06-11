@@ -6,9 +6,12 @@ POST http://localhost:3000/user
 Content-Type: application/json
 
 {
-    "firstName":"Arjun",
+    "firstName":"Bandana",
     "lastName":"Jaishi",
-    "email":"a.jaishi@ggmail.com",
-    "phone":"9765425173",
+    "email":"a.ka43l@ggmail.com",
+    "phone":"9765424141",
     "password":"Arjun123"
 }
+
+###
+GET http://localhost:3000/user/6485ba227aa9ace5003b899d
