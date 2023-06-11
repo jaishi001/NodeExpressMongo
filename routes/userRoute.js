@@ -36,4 +36,17 @@ router.get("/user/:id", async function (req, res) {
   return res.json(user);
 });
 
+/**
+ * Find all users
+ * GET: http://localhost:3000/user/
+ *
+ */
+
+router.get("/user", async function (req, res) {
+  const users = await User.find({});
+  if (!users) {
+    return res.json({ msg: "No Users Found" });
+  }
+  return res.json(users);
+});
 module.exports = router;

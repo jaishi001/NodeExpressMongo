@@ -13,5 +13,8 @@ Content-Type: application/json
     "password":"Arjun123"
 }
 
-###
+### FIND BY ID
 GET http://localhost:3000/user/6485ba227aa9ace5003b899d
+
+### FIND ALL USERS
+GET http://localhost:3000/user
