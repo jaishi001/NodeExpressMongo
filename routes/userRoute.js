@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../model/User");
+const bcrypt = require("bcryptjs");
 
 /**
  * Create User Route
@@ -10,10 +11,14 @@ router.post("/user", async function (req, res) {
   try {
     //Check if user already exists
     const isUserExists = await User.findOne({ email: req.body.email });
-    if (isUserExists) {
-      return res.json({ msg: "User Already Exists" });
-    }
+    // if (isUserExists) {
+    //   return res.json({ msg: "User Already Exists" });
+    // }
+
+    const salt = await bcrypt.genSalt(10); //generate salt with 10 rounds
     const userData = req.body;
+    const hash = await bcrypt.hash(userData["password"], salt); // generate hash
+    userData["password"] = hash; // replace object's plain value to hash
     const user = await User.create(userData);
     if (user) {
       return res.json({ msg: "User Created Successfully !", user: user });
