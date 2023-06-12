@@ -42,22 +42,30 @@ router.post("/user/login", async function (req, res) {
     return res.json({ msg: "Email and Password is required" });
   }
 
-  //Check if user exists or not and checks user's credentials
-  const user = await User.findOne({
-    email: email,
-    password: password,
-  });
-  if (!user) {
-    return res.json({ msg: "Either Email or Password is incorrect" });
+  //Check if user exists or not
+  let isUserExists = await User.findOne({ email: email });
+  if (isUserExists) {
+    const hashedPassword = isUserExists["password"];
+    //Compare Password Using Bcrypt.compare
+    const compareHashPassword = await bcrypt.compare(password, hashedPassword);
+    isUserExists.password = undefined; //Removes Password From Response
+    if (!compareHashPassword) {
+      return res.json({ msg: "Either Email or Password is incorrect" });
+    }
+    return res.json({
+      msg: `Welcome ${
+        isUserExists.middleName
+          ? isUserExists.firstName +
+            " " +
+            isUserExists.middleName +
+            " " +
+            isUserExists.lastName
+          : isUserExists.firstName + " " + isUserExists.lastName
+      } `,
+      user: isUserExists,
+    });
   }
-  res.json({
-    msg: `Welcome ${
-      user.middleName
-        ? user.firstName + " " + user.middleName + " " + user.lastName
-        : user.firstName + " " + user.lastName
-    } `,
-    user,
-  });
+  return res.json({ msg: "User Not FOund" });
 });
 
 /**

@@ -1,15 +1,15 @@
 #TEST REQUESTS
 
 
-
+###Create User
 POST http://localhost:3000/user
 Content-Type: application/json
 
 {
     "firstName":"Bandana",
     "lastName":"Jaishi",
-    "email":"a.ka43l@ggmail.com",
-    "phone":"9765424141",
+    "email":"arjun@ggmail.com",
+    "phone":"9765424189",
     "password":"Arjun123"
 }
 
@@ -20,7 +20,7 @@ POST http://localhost:3000/user/login
 Content-Type: application/json
 
 {
-    "email":"a.ka43l@ggmail.com",
+    "email":"arjun@ggmail.com",
     "password":"Arjun123"
 }
 
