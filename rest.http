@@ -13,6 +13,17 @@ Content-Type: application/json
     "password":"Arjun123"
 }
 
+
+### USER LOGIN
+
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+    "email":"a.ka43l@ggmail.com",
+    "password":"Arjun123"
+}
+
 ### FIND BY ID
 GET http://localhost:3000/user/6485ba227aa9ace5003b899d
 

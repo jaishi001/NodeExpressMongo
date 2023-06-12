@@ -5,15 +5,15 @@ const bcrypt = require("bcryptjs");
 
 /**
  * Create User Route
- * GET : http://locahost:3000/user
+ * POST : http://locahost:3000/user
  */
 router.post("/user", async function (req, res) {
   try {
     //Check if user already exists
     const isUserExists = await User.findOne({ email: req.body.email });
-    // if (isUserExists) {
-    //   return res.json({ msg: "User Already Exists" });
-    // }
+    if (isUserExists) {
+      return res.json({ msg: "User Already Exists" });
+    }
 
     const salt = await bcrypt.genSalt(10); //generate salt with 10 rounds
     const userData = req.body;
@@ -27,6 +27,37 @@ router.post("/user", async function (req, res) {
   } catch (error) {
     console.log(error.message, error.code);
   }
+});
+
+/**
+ * User Login
+ * POST : http://locahost:3000/user
+ */
+
+router.post("/user/login", async function (req, res) {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  if (!email || !password) {
+    return res.json({ msg: "Email and Password is required" });
+  }
+
+  //Check if user exists or not and checks user's credentials
+  const user = await User.findOne({
+    email: email,
+    password: password,
+  });
+  if (!user) {
+    return res.json({ msg: "Either Email or Password is incorrect" });
+  }
+  res.json({
+    msg: `Welcome ${
+      user.middleName
+        ? user.firstName + " " + user.middleName + " " + user.lastName
+        : user.firstName + " " + user.lastName
+    } `,
+    user,
+  });
 });
 
 /**
