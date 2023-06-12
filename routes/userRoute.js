@@ -8,6 +8,11 @@ const User = require("../model/User");
  */
 router.post("/user", async function (req, res) {
   try {
+    //Check if user already exists
+    const isUserExists = await User.findOne({ email: req.body.email });
+    if (isUserExists) {
+      return res.json({ msg: "User Already Exists" });
+    }
     const userData = req.body;
     const user = await User.create(userData);
     if (user) {
