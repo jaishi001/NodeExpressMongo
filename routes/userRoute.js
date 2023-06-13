@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../model/User");
 const bcrypt = require("bcryptjs");
 const generateToken = require("../util/generateToken");
+const verifyToken = require("../middleware/verifyToken");
 
 /**
  * Create User Route
@@ -55,20 +56,8 @@ router.post("/user/login", async function (req, res) {
 
     //Generate JWT Token
     const token = await generateToken({ email, password, user: isUserExists });
-    console.log(token);
-
-    isUserExists.password = undefined; //Removes Password From Response
     return res.json({
-      msg: `Welcome ${
-        isUserExists.middleName
-          ? isUserExists.firstName +
-            " " +
-            isUserExists.middleName +
-            " " +
-            isUserExists.lastName
-          : isUserExists.firstName + " " + isUserExists.lastName
-      } `,
-      user: isUserExists,
+      token,
     });
   }
   return res.json({ msg: "User Not FOund" });
@@ -80,7 +69,7 @@ router.post("/user/login", async function (req, res) {
  *
  */
 
-router.get("/user/:id", async function (req, res) {
+router.get("/user/:id", verifyToken, async function (req, res) {
   //Using Where and equals
   //   const user = await User.find().where("_id").equals(req.params.id);
   const user = await User.findById(req.params.id);

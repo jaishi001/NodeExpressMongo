@@ -10,9 +10,10 @@ async function generateToken({ email, password, user }) {
     expiresIn: "1h",
   };
   try {
-    if (email === user.email && password) {
-      token = await jwt.sign(payload, SECRET_KEY, options);
+    if (email !== user.email && password) {
+      res.status(401).json({ msg: "Unauthtorized" });
     }
+    token = await jwt.sign(payload, SECRET_KEY, options);
     return token;
   } catch (error) {
     console.log(error);
