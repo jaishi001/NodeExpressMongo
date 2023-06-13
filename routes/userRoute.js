@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../model/User");
 const bcrypt = require("bcryptjs");
+const generateToken = require("../util/generateToken");
 
 /**
  * Create User Route
@@ -48,10 +49,15 @@ router.post("/user/login", async function (req, res) {
     const hashedPassword = isUserExists["password"];
     //Compare Password Using Bcrypt.compare
     const compareHashPassword = await bcrypt.compare(password, hashedPassword);
-    isUserExists.password = undefined; //Removes Password From Response
     if (!compareHashPassword) {
       return res.json({ msg: "Either Email or Password is incorrect" });
     }
+
+    //Generate JWT Token
+    const token = await generateToken({ email, password, user: isUserExists });
+    console.log(token);
+
+    isUserExists.password = undefined; //Removes Password From Response
     return res.json({
       msg: `Welcome ${
         isUserExists.middleName
