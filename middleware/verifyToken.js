@@ -4,17 +4,15 @@ const { SECRET_KEY } = require("../credentials/credentials");
 function verifyToken(req, res, next) {
   let token = req.header("authorization");
   if (!token) {
-    return res.status(401).json({ msg: "No authoriation token found!" });
+    return res.status(401).json({ msg: "Unauthorized!" });
   }
 
-  if (token.startsWith("Bearer ")) {
-    token = token.slice(7, token.length).trimLeft();
+  if (!token.startsWith("Bearer ")) {
+    return res.status(401).json({ msg: "JWT Malformed!" });
   }
-  console.log(token, "\n");
-
+  token = token.slice(7, token.length).trimLeft();
   const decode = jwt.verify(token, SECRET_KEY);
   delete decode["user"]["password"];
-  console.log(decode);
   next();
 }
 module.exports = verifyToken;

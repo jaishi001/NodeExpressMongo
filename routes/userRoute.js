@@ -53,7 +53,6 @@ router.post("/user/login", async function (req, res) {
     if (!compareHashPassword) {
       return res.json({ msg: "Either Email or Password is incorrect" });
     }
-
     //Generate JWT Token
     const token = await generateToken({ email, password, user: isUserExists });
     return res.json({
@@ -69,6 +68,7 @@ router.post("/user/login", async function (req, res) {
  *
  */
 
+//Added Authentication in route
 router.get("/user/:id", verifyToken, async function (req, res) {
   //Using Where and equals
   //   const user = await User.find().where("_id").equals(req.params.id);
