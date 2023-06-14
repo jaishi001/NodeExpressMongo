@@ -2,9 +2,11 @@ const express = require("express");
 const router = express.Router();
 const User = require("../model/User");
 const bcrypt = require("bcryptjs");
-const generateToken = require("../util/generateToken");
-const verifyToken = require("../middleware/verifyToken");
+const generateAccessToken = require("../middleware/generateAccessToken");
+const verifyAccessToken = require("../middleware/verifyAccessToken");
 const upload = require("../util/upload");
+const generateRefreshToken = require("../middleware/generateRefreshToken");
+const verifyRefreshToken = require("../middleware/verifyRefreshTOken");
 
 /**
  * Create User Route
@@ -58,9 +60,16 @@ router.post("/user/login", async function (req, res) {
       return res.json({ msg: "Either Email or Password is incorrect" });
     }
     //Generate JWT Token
-    const token = await generateToken({ email, password, user: isUserExists });
+    const accessToken = await generateAccessToken({
+      user: isUserExists._id,
+    });
+
+    const refreshToken = await generateRefreshToken({
+      user: isUserExists._id,
+    });
     return res.json({
-      token,
+      accessToken,
+      refreshToken,
     });
   }
   return res.json({ msg: "User Not FOund" });
@@ -73,7 +82,7 @@ router.post("/user/login", async function (req, res) {
  */
 
 //Added Authentication in route
-router.get("/user/:id", verifyToken, async function (req, res) {
+router.get("/user/:id", verifyAccessToken, async function (req, res) {
   //Using Where and equals
   //   const user = await User.find().where("_id").equals(req.params.id);
   const user = await User.findById(req.params.id);
@@ -164,6 +173,14 @@ router.put("/user/:id", async function (req, res) {
 
 router.post("/upload", upload.single("file"), function (req, res) {
   console.log(req.file, "files");
+});
+
+router.post("/refreshToken", async function (req, res) {
+  const { refreshToken } = req.body;
+  const userId = await verifyRefreshToken({ refreshToken });
+  const accessToken = await generateAccessToken({ user: userId });
+  const refToken = await generateRefreshToken({ user: userId });
+  res.status(200).json({ accessToken, refreshToken: refToken });
 });
 
 module.exports = router;

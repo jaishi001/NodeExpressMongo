@@ -1,5 +1,6 @@
 const dotenv = require("dotenv");
 dotenv.config();
 module.exports = {
-  SECRET_KEY: process.env.SECRET_KEY,
+  ACCESS_TOKEN_SECRET_KEY: process.env.ACCESS_TOKEN_SECRET_KEY,
+  REFRESH_TOKEN_SECRET_KEY: process.env.REFRESH_TOKEN_SECRET_KEY,
 };

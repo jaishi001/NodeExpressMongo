@@ -20,15 +20,16 @@ POST http://localhost:3000/user/login
 Content-Type: application/json
 
 {
-    "email":"arjun@ggmail.com",
+    "email":"a.jaishi@gmail.com",
     "password":"Arjun123"
 }
 
 ### FIND BY ID
-GET http://localhost:3000/user/648762014bc5a316c6849aae
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0ODc2MjAxNGJjNWEzMTZjNjg0OWFhZSIsImZpcnN0TmFtZSI6IkJhbmRhbmEiLCJsYXN0TmFtZSI6IkphaXNoaSIsImVtYWlsIjoiYXJqdW5AZ2dtYWlsLmNvbSIsInBob25lIjoiOTc2NTQyNDE4OSIsInBhc3N3b3JkIjoiJDJhJDEwJG51UHVIM3l4RkpaL3pyckJlekNpYXVIWS5qZ3RTWWZ2LmpJWno5SGY4aUZ5c2JIRUcxbG5DIiwiY3JlYXRlZEF0IjoiMjAyMy0wNi0xMlQxODoyMDo0OS41MjFaIiwidXBkYXRlZEF0IjoiMjAyMy0wNi0xMlQxODoyMDo0OS41MjFaIiwiX192IjowfSwiaWF0IjoxNjg2NjY5MzQ1LCJleHAiOjE2ODY2NzI5NDV9.-JK9CiB1TNU3J-UJ6qskSKs8d0bmoDgLBLiEFLSiIqc
+GET http://localhost:3000/user/6489fc9bbac28be5cdc2ae29
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODlmYzliYmFjMjhiZTVjZGMyYWUyOSIsImlhdCI6MTY4Njc3MzAyMCwiZXhwIjoxNjg2NzczMDUwfQ.TtQiOk0LBxWjnRoeXyqejUOV2ONiDw9bivLSRDcrAxs
 
-### FIND ALL USERS
+
+###
 GET http://localhost:3000/user
 
 
@@ -48,4 +49,14 @@ Content-Type: application/json
 {
     "firstName":"ArjunJ",
     "lastName":"Raj"
+}
+
+
+
+###REFRESH TOKEN
+POST http://localhost:3000/refreshToken
+Content-Type: application/json
+
+{
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODlmYzliYmFjMjhiZTVjZGMyYWUyOSIsImlhdCI6MTY4Njc3Mjk4OSwiZXhwIjoxNzE4MzMwNTg5fQ._b3s6x8xFDJ0G7jYK_1CJ_gjbsCJfJMLQDbHY_I1obs"
 }
