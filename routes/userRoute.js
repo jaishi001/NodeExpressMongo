@@ -10,7 +10,7 @@ const upload = require("../util/upload");
  * Create User Route
  * POST : http://locahost:3000/user
  */
-router.post("/user", async function (req, res) {
+router.post("/user", upload.single("photo"), async function (req, res) {
   try {
     //Check if user already exists
     const isUserExists = await User.findOne({ email: req.body.email });
@@ -20,6 +20,9 @@ router.post("/user", async function (req, res) {
 
     const salt = await bcrypt.genSalt(10); //generate salt with 10 rounds
     const userData = req.body;
+    if (req.file) {
+      userData.photo = req.file.path;
+    }
     const hash = await bcrypt.hash(userData["password"], salt); // generate hash
     userData["password"] = hash; // replace object's plain value to hash
     const user = await User.create(userData);
