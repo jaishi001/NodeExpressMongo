@@ -1,6 +1,7 @@
 const express = require("express");
 const { connectMongoDB } = require("./config/db");
 require("colors");
+const path = require("path");
 
 const userRoute = require("./routes/userRoute");
 
@@ -8,6 +9,7 @@ require("dotenv").config({});
 connectMongoDB();
 
 const app = express();
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

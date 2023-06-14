@@ -4,6 +4,7 @@ const User = require("../model/User");
 const bcrypt = require("bcryptjs");
 const generateToken = require("../util/generateToken");
 const verifyToken = require("../middleware/verifyToken");
+const upload = require("../util/upload");
 
 /**
  * Create User Route
@@ -152,6 +153,14 @@ router.put("/user/:id", async function (req, res) {
     return res.json({ msg: "User Updated", updateUser });
   }
   res.json({ msg: "JPT" });
+});
+
+/**
+ * File Upload Route
+ */
+
+router.post("/upload", upload.single("file"), function (req, res) {
+  console.log(req.file, "files");
 });
 
 module.exports = router;

@@ -13,6 +13,7 @@ function verifyToken(req, res, next) {
   token = token.slice(7, token.length).trimLeft();
   const decode = jwt.verify(token, SECRET_KEY);
   delete decode["user"]["password"];
+  req.user = decode;
   next();
 }
 module.exports = verifyToken;
