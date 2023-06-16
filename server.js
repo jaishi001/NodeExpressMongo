@@ -2,6 +2,7 @@ const express = require("express");
 const { connectMongoDB } = require("./config/db");
 require("colors");
 const path = require("path");
+require("./util/redis");
 
 const userRoute = require("./routes/userRoute");
 
