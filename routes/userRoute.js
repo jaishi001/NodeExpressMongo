@@ -178,9 +178,12 @@ router.post("/upload", upload.single("file"), function (req, res) {
 router.post("/refreshToken", async function (req, res) {
   const { refreshToken } = req.body;
   const userId = await verifyRefreshToken({ refreshToken });
-  const accessToken = await generateAccessToken({ user: userId });
-  const refToken = await generateRefreshToken({ user: userId });
-  res.status(200).json({ accessToken, refreshToken: refToken });
+  if (userId) {
+    const accessToken = await generateAccessToken({ user: userId });
+    const refToken = await generateRefreshToken({ user: userId });
+    return res.status(200).json({ accessToken, refreshToken: refToken });
+  }
+  return res.status(401).json({ msg: "Unauthorized" });
 });
 
 module.exports = router;

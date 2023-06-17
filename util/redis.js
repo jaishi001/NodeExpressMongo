@@ -1,8 +1,8 @@
 const { createClient } = require("redis");
 const { REDIS_HOST, REDIS_PORT } = require("../credentials/credentials");
 const options = {
-  port: 6379,
-  host: "127.0.0.1",
+  port: REDIS_PORT,
+  host: REDIS_HOST,
 };
 const redisClient = createClient(options);
 redisClient.connect();
@@ -23,7 +23,7 @@ redisClient.on("end", function () {
 });
 
 // process.on("SIGINT", function () {
-//   redisClient.quit();
+//   redisClient.disconnect();
 // });
 
 module.exports = redisClient;

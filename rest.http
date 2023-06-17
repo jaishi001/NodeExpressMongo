@@ -26,7 +26,7 @@ Content-Type: application/json
 
 ### FIND BY ID
 GET http://localhost:3000/user/6489fc9bbac28be5cdc2ae29
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODlmYzliYmFjMjhiZTVjZGMyYWUyOSIsImlhdCI6MTY4Njc3MzAyMCwiZXhwIjoxNjg2NzczMDUwfQ.TtQiOk0LBxWjnRoeXyqejUOV2ONiDw9bivLSRDcrAxs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODlmYzliYmFjMjhiZTVjZGMyYWUyOSIsImlhdCI6MTY4Njk5Njc1NywiZXhwIjoxNjg2OTk2Nzg3fQ.hB6igsVQzg4TbUKSKbhCMF3hjRrK0D4DEiQz4B9MZZo
 
 
 ###
@@ -58,5 +58,5 @@ POST http://localhost:3000/refreshToken
 Content-Type: application/json
 
 {
-    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODlmYzliYmFjMjhiZTVjZGMyYWUyOSIsImlhdCI6MTY4Njc3Mjk4OSwiZXhwIjoxNzE4MzMwNTg5fQ._b3s6x8xFDJ0G7jYK_1CJ_gjbsCJfJMLQDbHY_I1obs"
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODlmYzliYmFjMjhiZTVjZGMyYWUyOSIsImlhdCI6MTY4Njk5Njc5NSwiZXhwIjoxNzE4NTU0Mzk1fQ.zXs17M1LJd7BBAzBA8_r09U4sbm9UrmvCFVyleI66Lc"
 }
